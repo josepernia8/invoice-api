@@ -29,7 +29,10 @@ class InvoiceService {
    * @returns {Invoice}
    */
    get = async (id: number): Promise<Invoice | null> => {
-    const result = await this._repository.invoice.findOneBy({id})
+    const result = await this._repository.invoice.findOne({
+      where: {id},
+      relations: {user: true, client: true, invoiceItems: true}
+    })
 
     return result
   }
