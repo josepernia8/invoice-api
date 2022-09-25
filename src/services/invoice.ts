@@ -88,7 +88,7 @@ class InvoiceService {
   }
 
   /**
-   * Create a new Invoice
+   * Update an Invoice
    *
    * @param {PostInvoiceData[]} invoiceData
    * @returns {Invoice}
