@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  server:
+    container_name: server
+    build:
+      context: .
+      target: dev
+    environment:
+      - PORT=4000
+    volumes:
+      - .:/app/:cached
+      # - /app/node_modules
+    command: npm run dev
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+  db:
+    image: postgres:14-alpine
+    container_name: db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: invoice_db
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data/:delegated
+
+volumes:
+  db_data:
